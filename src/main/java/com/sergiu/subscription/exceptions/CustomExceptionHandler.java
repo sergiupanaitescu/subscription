@@ -12,10 +12,16 @@ public class CustomExceptionHandler {
 
 	private static final Logger logger = LoggerFactory.getLogger(CustomExceptionHandler.class);
 
+	@ExceptionHandler(value = { DuplicateSubscription.class })
+	public ResponseEntity<Object> handleDuplicateSubscription(Exception e) {
+		logger.error("Unexpected error!: ", e.getMessage());
+		return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	}
+
 	@ExceptionHandler(value = { Exception.class })
 	public ResponseEntity<Object> handleInvalidInputException(Exception e) {
 		logger.error("Unexpected error!: ", e.getMessage());
-		return new ResponseEntity<Object>("Unexpected error!", HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<>("Unexpected error!", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 }
