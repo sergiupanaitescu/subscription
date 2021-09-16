@@ -9,7 +9,7 @@
 	</appender>
 
 	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
-		<File>authentication.log</File>
+		<File>subscription-demo.log</File>
 		<encoder>
 			<pattern>[%d{yyyy-MM-dd'T'HH:mm:ss.sss'Z'}] [%C] [%t] [%L] [%-5p]
 				%m%n</pattern>
