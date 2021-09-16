@@ -8,13 +8,13 @@ import com.sergiu.subscription.dto.ReturnSubscriptionDTO;
 import com.sergiu.subscription.entities.Subscription;
 
 @Component
-public class SubscriptionMapper implements Mapper<Subscription, ReturnSubscriptionDTO> {
+public class ReturnSubscriptionMapper implements Mapper<Subscription, ReturnSubscriptionDTO> {
 
 	private PlanMapper planMapper;
 
 	private ProductMapper productMapper;
 
-	public SubscriptionMapper(PlanMapper planMapper, ProductMapper productMapper) {
+	public ReturnSubscriptionMapper(PlanMapper planMapper, ProductMapper productMapper) {
 		this.planMapper = planMapper;
 		this.productMapper = productMapper;
 	}

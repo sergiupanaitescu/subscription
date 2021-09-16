@@ -35,6 +35,7 @@ public class Subscription {
 			@JoinColumn(name = "subscription_id") }, inverseJoinColumns = { @JoinColumn(name = "product_id") })
 	private List<Product> products = new ArrayList<>();
 
+	//could also be one to one as it is not bidirectional?
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "plan_id")
 	private Plan plan;

@@ -12,16 +12,29 @@ public class CustomExceptionHandler {
 
 	private static final Logger logger = LoggerFactory.getLogger(CustomExceptionHandler.class);
 
-	@ExceptionHandler(value = { DuplicateSubscription.class })
-	public ResponseEntity<Object> handleDuplicateSubscription(Exception e) {
-		logger.error("Unexpected error!: ", e.getMessage());
+	
+	@ExceptionHandler(value = { ObjectNotFoundException.class })
+	public ResponseEntity<Object> handleObjectNotFound(Exception e) {
+		logger.error("Object not found!: ", e.getMessage());
+		return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(value = { GenericRuntimeMessageException.class })
+	public ResponseEntity<Object> handleGenericRuntimeMessageException(Exception e) {
+		logger.error("GenericException!: ", e.getMessage());
 		return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(value = { DuplicateSubscriptionException.class })
+	public ResponseEntity<Object> handleDuplicateSubscription(Exception e) {
+		logger.error("Duplicate subscription per user!: ", e.getMessage());
+		return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
 	}
 
 	@ExceptionHandler(value = { Exception.class })
 	public ResponseEntity<Object> handleInvalidInputException(Exception e) {
 		logger.error("Unexpected error!: ", e.getMessage());
-		return new ResponseEntity<>("Unexpected error!", HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<>("Unexpected error!", HttpStatus.NOT_ACCEPTABLE);//maybe find a better status
 	}
 
 }
