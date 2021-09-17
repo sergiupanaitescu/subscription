@@ -42,9 +42,7 @@ public class SubscriptionController {
 	}
 
 	@PutMapping
-	@RequestMapping(path = "/update/user/{userId}")
-	public ReturnSubscriptionDTO updateSubscription(@Validated @RequestBody RequestSubscriptionDTO subscription,
-			@PathVariable("userId") Long userId) {
-		return subService.updateSubscription(subscription, userId);
+	public ReturnSubscriptionDTO updateSubscription(@Validated @RequestBody RequestSubscriptionDTO subscription) {
+		return subService.updateSubscription(subscription);
 	}
 }

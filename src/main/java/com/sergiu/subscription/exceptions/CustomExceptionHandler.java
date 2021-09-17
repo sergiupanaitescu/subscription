@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -31,6 +32,12 @@ public class CustomExceptionHandler {
 		return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
 	}
 
+	@ExceptionHandler(value = { MethodArgumentNotValidException.class })
+	public ResponseEntity<Object> handleValidationException(Exception e) {
+		logger.error("Validation exception!: ", e.getMessage());
+		return new ResponseEntity<>("Request validation exception! Check mandatory params!", HttpStatus.BAD_REQUEST);//maybe find a better status
+	}
+	
 	@ExceptionHandler(value = { Exception.class })
 	public ResponseEntity<Object> handleInvalidInputException(Exception e) {
 		logger.error("Unexpected error!: ", e.getMessage());
